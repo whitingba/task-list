@@ -47,7 +47,7 @@ document.querySelector('form').addEventListener('submit',
 //if we were to do a for loop on this array we would get each individual item in the array, we need to parse it
 // console.log(tasks);
 
-
+//parse the local storage so we can see the individual tasks
 const tasks = JSON.parse(localStorage.getItem('tasks'));
 for (let i = 0; i < tasks.length; i++) {
   console.log(tasks[i]);
