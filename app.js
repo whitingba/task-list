@@ -18,7 +18,6 @@ function loadEventListeners() {
   //delete individual tasks
   taskList.addEventListener('click', deleteTask);
 
-
   //clear all tasks
   clearBtn.addEventListener('click', clearAllTasks);
 
@@ -74,7 +73,17 @@ function deleteTask(e) {
 
 //function to clear all the tasks on the list
 function clearAllTasks() {
-  console.log('this will delete all of the tasks');
+  //test that I am targeting the 'clear tasks' button
+  //console.log('this will delete all of the tasks');
+
+  //taskList.innerHTML = "";
+
+  // while loop is faster method of removing tasks
+  while (taskList.firstChild) {
+
+    taskList.removeChild(taskList.firstChild);
+  }
+
 }
 
 
