@@ -16,10 +16,8 @@ function loadEventListeners() {
   form.addEventListener('submit', addTask);
 
   //delete individual tasks
-  const deleteItem = document.querySelector('.delete-item');
-  if (deleteItem) {
-    deleteItem.addEventListener('click', deleteTask);
-  }
+  taskList.addEventListener('click', deleteTask);
+
 
   //clear all tasks
   clearBtn.addEventListener('click', clearAllTasks);
@@ -59,10 +57,18 @@ function addTask(e) {
   e.preventDefault();
 }
 
-//function to clear an individual task
-function deleteTask() {
-  console.log('this will clear individual items');
+// Function to clear an individual task
+function deleteTask(e) {
+  //target of the icon is the icon tag, so we need to check to see if the parent, the 'a' tag contains 'delete-item' in its class list
+  if (e.target.parentElement.classList.contains('delete-item')) {
+    //console.log(e.target);
+    //we then want to remove the list item (li) and we will need to target the parent of the parent. 
+    e.target.parentElement.parentElement.remove();
+  }
+
+
 }
+
 
 //function to clear all the tasks on the list
 function clearAllTasks() {
