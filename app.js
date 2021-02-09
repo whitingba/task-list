@@ -15,6 +15,14 @@ function loadEventListeners() {
   //add task event
   form.addEventListener('submit', addTask);
 
+  //delete individual tasks
+  const deleteItem = document.querySelector('.delete-item');
+  if (deleteItem) {
+    deleteItem.addEventListener('click', deleteTask);
+  }
+
+  //clear all tasks
+  clearBtn.addEventListener('click', clearAllTasks);
 
 }
 
@@ -50,3 +58,15 @@ function addTask(e) {
 
   e.preventDefault();
 }
+
+//function to clear an individual task
+function deleteTask() {
+  console.log('this will clear individual items');
+}
+
+//function to clear all the tasks on the list
+function clearAllTasks() {
+  console.log('this will delete all of the tasks');
+}
+
+
