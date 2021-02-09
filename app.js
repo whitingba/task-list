@@ -62,8 +62,10 @@ function deleteTask(e) {
   //target of the icon is the icon tag, so we need to check to see if the parent, the 'a' tag contains 'delete-item' in its class list
   if (e.target.parentElement.classList.contains('delete-item')) {
     //console.log(e.target);
-    //we then want to remove the list item (li) and we will need to target the parent of the parent. 
-    e.target.parentElement.parentElement.remove();
+    if (confirm('Are you sure you want to remove?')) {
+      //we then want to remove the list item (li) and we will need to target the parent of the parent. 
+      e.target.parentElement.parentElement.remove();
+    }
   }
 
 
