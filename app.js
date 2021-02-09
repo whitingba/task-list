@@ -21,6 +21,9 @@ function loadEventListeners() {
   //clear all tasks
   clearBtn.addEventListener('click', clearAllTasks);
 
+  //filter tasks
+  filter.addEventListener('keyup', filterTasks);
+
 }
 
 //Function: Add Task
@@ -86,4 +89,18 @@ function clearAllTasks() {
 
 }
 
+//filter the tasks
+function filterTasks(e) {
+  //grab the text that is input
+  const text = e.target.value.toLowerCase();
 
+  document.querySelectorAll('.collection-item').forEach(function (task) {
+    const item = task.firstChild.textContent;
+    if (item.toLowerCase().indexOf(text) != -1) {
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  });
+
+}
