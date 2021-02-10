@@ -51,6 +51,9 @@ function addTask(e) {
   //Append li to the ul
   taskList.appendChild(li);
 
+  //store in local storage
+  storeTaskInLocalStorage(taskInput.value);
+
   //Clear input
   taskInput.value = '';
 
@@ -58,6 +61,25 @@ function addTask(e) {
 
   e.preventDefault();
 }
+
+//function to store uset inputted tasks to local storage
+function storeTaskInLocalStorage(task) {
+  //create a variable called tasks
+  let tasks;
+  //if there are no items in local storage with the key of 'tasks, set variable tasks to an empty array
+  if (localStorage.getItem('tasks') === null) {
+    tasks = [];
+    //else set tasks to what is local storage parsing the strings into objects
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
+  //push those values input to the tasks array
+  tasks.push(task);
+  //set local storage with a key of tasks and a string of the task value
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+
+}
+
 
 // Function to clear an individual task
 function deleteTask(e) {
