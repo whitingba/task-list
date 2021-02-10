@@ -31,15 +31,15 @@ function loadEventListeners() {
 //Get tasks from Local Storage
 function getTasks() {
 
-  loadUserTasks();
-  // let tasks;
-  // //check local storage to see if anything is stored
-  // if (localStorage.getItem('tasks') === null) {
-  //   tasks = [];
-  // } else {
-  //   //add items in local storage to the tasks array
-  //   tasks = JSON.parse(localStorage.getItem('tasks'));
-  // }
+
+  let tasks;
+  //check local storage to see if anything is stored
+  if (localStorage.getItem('tasks') === null) {
+    tasks = [];
+  } else {
+    //add items in local storage to the tasks array
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
   //forEach loop to loop through the array of tasks
   tasks.forEach(function (task) {
     //create li element for the task
@@ -100,8 +100,11 @@ function addTask(e) {
   e.preventDefault();
 }
 
-//function to load the tasks and to simplify other functions
-function loadUserTasks() {
+
+//function to store user inputted tasks to local storage
+function storeTaskInLocalStorage(task) {
+
+
   //create a variable called tasks
   let tasks;
   //if there are no items in local storage with the key of 'tasks, set variable tasks to an empty array
@@ -111,21 +114,6 @@ function loadUserTasks() {
   } else {
     tasks = JSON.parse(localStorage.getItem('tasks'));
   }
-}
-
-//function to store user inputted tasks to local storage
-function storeTaskInLocalStorage(task) {
-  loadUserTasks();
-
-  // //create a variable called tasks
-  // let tasks;
-  // //if there are no items in local storage with the key of 'tasks, set variable tasks to an empty array
-  // if (localStorage.getItem('tasks') === null) {
-  //   tasks = [];
-  //   //else set tasks to what is local storage parsing the strings into objects
-  // } else {
-  //   tasks = JSON.parse(localStorage.getItem('tasks'));
-  // }
   //push those values input to the tasks array
   tasks.push(task);
   //set local storage with a key of tasks and a string of the task value
@@ -152,15 +140,14 @@ function deleteTask(e) {
 //Remove from Local Storage
 function removeTaskFromLocalStorage(taskItem) {
 
-  loadUserTasks();
-  // let tasks;
-  // //check local storage to see if anything is stored
-  // if (localStorage.getItem('tasks') === null) {
-  //   tasks = [];
-  // } else {
-  //   //add items in local storage to the tasks array
-  //   tasks = JSON.parse(localStorage.getItem('tasks'));
-  // }
+  let tasks;
+  //check local storage to see if anything is stored
+  if (localStorage.getItem('tasks') === null) {
+    tasks = [];
+  } else {
+    //add items in local storage to the tasks array
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
 
   tasks.forEach(function (task, index) {
 
