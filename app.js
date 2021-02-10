@@ -30,14 +30,16 @@ function loadEventListeners() {
 
 //Get tasks from Local Storage
 function getTasks() {
-  let tasks;
-  //check local storage to see if anything is stored
-  if (localStorage.getItem('tasks') === null) {
-    tasks = [];
-  } else {
-    //add items in local storage to the tasks array
-    tasks = JSON.parse(localStorage.getItem('tasks'));
-  }
+
+  loadUserTasks();
+  // let tasks;
+  // //check local storage to see if anything is stored
+  // if (localStorage.getItem('tasks') === null) {
+  //   tasks = [];
+  // } else {
+  //   //add items in local storage to the tasks array
+  //   tasks = JSON.parse(localStorage.getItem('tasks'));
+  // }
   //forEach loop to loop through the array of tasks
   tasks.forEach(function (task) {
     //create li element for the task
@@ -98,8 +100,8 @@ function addTask(e) {
   e.preventDefault();
 }
 
-//function to store uset inputted tasks to local storage
-function storeTaskInLocalStorage(task) {
+//function to load the tasks and to simplify other functions
+function loadUserTasks() {
   //create a variable called tasks
   let tasks;
   //if there are no items in local storage with the key of 'tasks, set variable tasks to an empty array
@@ -109,6 +111,21 @@ function storeTaskInLocalStorage(task) {
   } else {
     tasks = JSON.parse(localStorage.getItem('tasks'));
   }
+}
+
+//function to store user inputted tasks to local storage
+function storeTaskInLocalStorage(task) {
+  loadUserTasks();
+
+  // //create a variable called tasks
+  // let tasks;
+  // //if there are no items in local storage with the key of 'tasks, set variable tasks to an empty array
+  // if (localStorage.getItem('tasks') === null) {
+  //   tasks = [];
+  //   //else set tasks to what is local storage parsing the strings into objects
+  // } else {
+  //   tasks = JSON.parse(localStorage.getItem('tasks'));
+  // }
   //push those values input to the tasks array
   tasks.push(task);
   //set local storage with a key of tasks and a string of the task value
@@ -125,10 +142,34 @@ function deleteTask(e) {
     if (confirm('Are you sure you want to remove?')) {
       //we then want to remove the list item (li) and we will need to target the parent of the parent. 
       e.target.parentElement.parentElement.remove();
-
+      //console.log(e.target.parentElement.parentElement.innerText);
       //remove from local storage
+      removeTaskFromLocalStorage(e.target.parentElement.parentElement);
     }
   }
+}
+
+//Remove from Local Storage
+function removeTaskFromLocalStorage(taskItem) {
+
+  loadUserTasks();
+  // let tasks;
+  // //check local storage to see if anything is stored
+  // if (localStorage.getItem('tasks') === null) {
+  //   tasks = [];
+  // } else {
+  //   //add items in local storage to the tasks array
+  //   tasks = JSON.parse(localStorage.getItem('tasks'));
+  // }
+
+  tasks.forEach(function (task, index) {
+
+    if (taskItem.firstChild.textContent === task) {
+      tasks.splice(index, 1)
+    }
+  });
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 
 
 }
