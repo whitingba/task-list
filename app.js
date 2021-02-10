@@ -11,7 +11,8 @@ loadEventListeners();
 
 //Function to load all event Listeners
 function loadEventListeners() {
-
+  //DOM load event
+  document.addEventListener('DOMContentLoaded', getTasks);
   //add task event
   form.addEventListener('submit', addTask);
 
@@ -25,6 +26,41 @@ function loadEventListeners() {
   filter.addEventListener('keyup', filterTasks);
 
 }
+
+
+//Get tasks from Local Storage
+function getTasks() {
+  let tasks;
+  //check local storage to see if anything is stored
+  if (localStorage.getItem('tasks') === null) {
+    tasks = [];
+  } else {
+    //add items in local storage to the tasks array
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
+  //forEach loop to loop through the array of tasks
+  tasks.forEach(function (task) {
+    //create li element for the task
+    const li = document.createElement('li');
+    //add a class to the li
+    li.className = 'collection-item';
+    //Create text node and append to li
+    li.appendChild(document.createTextNode(task));
+    // Create new link element
+    const link = document.createElement('a');
+    //Add class to the link (secondary-content class in Materialize will set the content to the right)
+    link.className = 'delete-item secondary-content';
+    //Add icon html
+    link.innerHTML = '<i class="material-icons">clear</i>';
+    //Append the link to the li
+    li.appendChild(link);
+
+    //Append li to the ul
+    taskList.appendChild(li);
+
+  })
+}
+
 
 //Function: Add Task
 function addTask(e) {
@@ -89,6 +125,8 @@ function deleteTask(e) {
     if (confirm('Are you sure you want to remove?')) {
       //we then want to remove the list item (li) and we will need to target the parent of the parent. 
       e.target.parentElement.parentElement.remove();
+
+      //remove from local storage
     }
   }
 
